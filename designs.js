@@ -5,39 +5,34 @@
 
 function makeGrid(a,b)
 {
+$('tr').remove();
+	for(let r=0;r<a;r++)
+	{
+		let x="<tr id=row" + r + "></tr>";
+		$("#pixelCanvas").append(x);
+		for(let c=0;c<b;c++)  
+    	{
+        	let y= "<td></td>;" 
+        	$('#row' + r).append(y);
+		}
+    }
 
-
- for(let r=0;r<a;r++)
-  {
-   let x=document.getElementById("pixelCanvas").insertRow(r);
-   for(let c=0;c<b;c++)  
-    {
-     let y=  x.insertCell(c);
-$(y).click (function(){
-  $(this).css('background', $('#colorPicker').val());
-});
-//$(y).remove();
-	}
-  }
-
+    $("td").click (function(){
+       if ($(this).attr('style')) $(this).css('background', "");
+       else $(this).css('background', $('#colorPicker').val());
+        });
 }
 
-let q=0;
-while(q<1){
- $('.sub').click
- (function(event)
- {
-N = document.getElementById('inputHeight').value;
-M = document.getElementById('inputWeight').value;
- 	
-event.preventDefault();
-makeGrid(N,M);
+$('.make').click(function(event)
+{
+	N = $('#inputHeight').val();
+	M = $('#inputWeight').val();
+	makeGrid(N,M);
+	event.preventDefault();
+});
+
+$('.remove').off('click', function(event)
+{
+	makeGrid();
+	event.preventDefault();
  });
- q++;
-}
- $('.sub1').off('click', function(event){
-
- 	makeGrid();
-
-event.preventDefault()
-});
